@@ -12,6 +12,11 @@ const RECORDS_PER_PAGE = 15;
 const ArtistItem = ({ artist, showRecords }: Props) => {
   const [recordPage, setRecordPage] = useState(1);
 
+  const handlePageChange = (newPage: number) => {
+    setRecordPage(newPage);
+    window.scrollTo(0, 0);
+  };
+
   const totalRecords = artist.record.length;
   const needsPagination = showRecords && totalRecords > RECORDS_PER_PAGE;
   const totalRecordPages = Math.ceil(totalRecords / RECORDS_PER_PAGE);
@@ -46,7 +51,7 @@ const ArtistItem = ({ artist, showRecords }: Props) => {
           const mediaShort = record.media === 'records' ? 'R' : record.media;
           return (
             <tr key={record.recordid} className="record-sub-row">
-              <td className="ps-3 ps-sm-4 small">
+              <td className="ps-3 ps-sm-4 normal-case">
                 <span className="text-muted me-1">{record.recorded} - </span>
                 <Link
                   to={`/record/${artist.artistid}/${record.recordid}`}
@@ -67,7 +72,7 @@ const ArtistItem = ({ artist, showRecords }: Props) => {
                   {mediaShort}
                 </span>
               </td>
-              <td className="text-muted small d-none d-sm-table-cell">{record.field}</td>
+              <td className="text-muted normal-case d-none d-sm-table-cell">{record.field}</td>
             </tr>
           );
         })}
@@ -86,13 +91,13 @@ const ArtistItem = ({ artist, showRecords }: Props) => {
                   <li className={`page-item ${recordPage === 1 ? 'disabled' : ''}`}>
                     <button
                       className="page-link"
-                      onClick={() => setRecordPage(recordPage - 1)}
+                      onClick={() => handlePageChange(recordPage - 1)}
                       disabled={recordPage === 1}
                     >‹</button>
                   </li>
                   {Array.from({ length: totalRecordPages }, (_, i) => i + 1).map((page) => (
                     <li key={page} className={`page-item ${recordPage === page ? 'active' : ''}`}>
-                      <button className="page-link" onClick={() => setRecordPage(page)}>
+                      <button className="page-link" onClick={() => handlePageChange(page)}>
                         {page}
                       </button>
                     </li>
@@ -100,7 +105,7 @@ const ArtistItem = ({ artist, showRecords }: Props) => {
                   <li className={`page-item ${recordPage === totalRecordPages ? 'disabled' : ''}`}>
                     <button
                       className="page-link"
-                      onClick={() => setRecordPage(recordPage + 1)}
+                      onClick={() => handlePageChange(recordPage + 1)}
                       disabled={recordPage === totalRecordPages}
                     >›</button>
                   </li>

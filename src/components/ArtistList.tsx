@@ -34,7 +34,7 @@ const ArtistList = ({ artists, searchText, currentPage, pageSize, onPageChange }
       pages.push(1);
       if (currentPage > 4) pages.push('...');
       const start = Math.max(2, currentPage - 2);
-      const end   = Math.min(totalPages - 1, currentPage + 2);
+      const end = Math.min(totalPages - 1, currentPage + 2);
       for (let i = start; i <= end; i++) pages.push(i);
       if (currentPage < totalPages - 3) pages.push('...');
       pages.push(totalPages);
@@ -50,14 +50,14 @@ const ArtistList = ({ artists, searchText, currentPage, pageSize, onPageChange }
           {filtered.length === 0
             ? 'No artists match your search.'
             : showRecords
-            ? <><strong>{filtered.length}</strong> artist{filtered.length !== 1 ? 's' : ''} found</>
-            : (
-              <>
-                Showing{' '}
-                <strong>{(currentPage - 1) * pageSize + 1}–{Math.min(currentPage * pageSize, filtered.length)}</strong>
-                {' '}of <strong>{filtered.length}</strong> artists
-              </>
-            )
+              ? <><strong>{filtered.length}</strong> artist{filtered.length !== 1 ? 's' : ''} found</>
+              : (
+                <>
+                  Showing{' '}
+                  <strong>{(currentPage - 1) * pageSize + 1}–{Math.min(currentPage * pageSize, filtered.length)}</strong>
+                  {' '}of <strong>{filtered.length}</strong> artists
+                </>
+              )
           }
         </p>
         {!showRecords && totalPages > 1 && (
@@ -73,8 +73,8 @@ const ArtistList = ({ artists, searchText, currentPage, pageSize, onPageChange }
               <thead className="table-light">
                 <tr>
                   <th>Artist</th>
-                  <th className="text-center col-records">Records</th>
-                  {showRecords && <th className="d-none d-sm-table-cell">Albums</th>}
+                  <th className="text-center col-records">Discs</th>
+                  {showRecords && <th className="d-none d-sm-table-cell">Field</th>}
                 </tr>
               </thead>
               <tbody>
