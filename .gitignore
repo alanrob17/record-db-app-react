@@ -3,4 +3,4 @@
 
 *.bak
 dist/*
-
+node_modules/*
